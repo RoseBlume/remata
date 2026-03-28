@@ -25,7 +25,6 @@ Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
 Remata = "0.1"
-
 ```
 
 ## Example
