@@ -31,13 +31,14 @@
 //!
 //! ```no_run
 //! use std::fs;
-//! use your_crate_name::Id3;
+//! use remata::Id3;
+//! use remata::ParserError;
 //!
 //! let data = fs::read("audio.mp3")?;
 //!
-//! let meta = Id3::parse(&data)?;
-//! println!("{}", meta);
-//! # Ok::<(), Box<dyn std::error::Error>>(())
+//! let meta: Result<Id3, ParserError> = Id3::parse(&data);
+//! println!("{}", meta?);
+//! # Ok::<(), ParserError>(())
 //! ```
 //!
 //! ---
@@ -46,16 +47,19 @@
 //!
 //! ```no_run
 //! use std::fs;
-//! use your_crate_name::RiffMeta;
+//! use remata::RiffMeta;
+//! use remata::ParserError;
 //!
 //! let data = fs::read("audio.wav")?;
 //!
-//! let meta = RiffMeta::parse(&data)?;
+//! let meta: Result<RiffMeta, ParserError> = RiffMeta::parse(&data);
 //!
-//! if let Some(title) = meta.title {
-//!     println!("Title: {}", title);
+//! if let Ok(meta) = meta {
+//!     if let Some(title) = meta.title {
+//!         println!("Title: {}", title);
+//!     }
 //! }
-//! # Ok::<(), Box<dyn std::error::Error>>(())
+//! # Ok::<(), ParserError>(())
 //! ```
 //!
 //! ---
@@ -64,13 +68,14 @@
 //!
 //! ```no_run
 //! use std::fs;
-//! use your_crate_name::AsfMeta;
+//! use remata::AsfMeta;
+//! use remata::ParserError;
 //!
 //! let data = fs::read("audio.wma")?;
 //!
-//! let meta = AsfMeta::parse(&data)?;
-//! println!("{}", meta);
-//! # Ok::<(), Box<dyn std::error::Error>>(())
+//! let meta: Result<AsfMeta, ParserError> = AsfMeta::parse(&data);
+//! println!("{}", meta?);
+//! # Ok::<(), ParserError>(())
 //! ```
 //!
 //! ---
@@ -79,16 +84,19 @@
 //!
 //! ```no_run
 //! use std::fs;
-//! use your_crate_name::AtomMeta;
+//! use remata::AtomMeta;
+//! use remata::ParserError;
 //!
 //! let data = fs::read("audio.m4a")?;
 //!
-//! let meta = AtomMeta::parse(&data)?;
+//! let meta: Result<AtomMeta, ParserError> = AtomMeta::parse(&data);
 //!
-//! if let Some(artist) = meta.artist {
-//!     println!("Artist: {}", artist);
+//! if let Ok(meta) = meta {
+//!     if let Some(artist) = meta.artist {
+//!         println!("Artist: {}", artist);
+//!     }
 //! }
-//! # Ok::<(), Box<dyn std::error::Error>>(())
+//! # Ok::<(), ParserError>(())
 //! ```
 //!
 //! ---
@@ -97,25 +105,25 @@
 //!
 //! ```no_run
 //! use std::fs;
-//! use your_crate_name::Vob;
+//! use remata::Vob;
+//! use remata::ParserError;
 //!
 //! let data = fs::read("audio.flac")?;
 //!
-//! let meta = Vob::parse(&data)?;
-//!
-//! println!("{}", meta);
-//! # Ok::<(), Box<dyn std::error::Error>>(())
+//! let meta: Result<Vob, ParserError> = Vob::parse(&data);
+//! println!("{}", meta?);
+//! # Ok::<(), ParserError>(())
 //! ```
 //!
 //! ---
 //!
 //! ## Error Handling
 //!
-//! Each parser returns its own error type (e.g. `Id3Error`, `RiffError`, etc.).
-//! These errors contain human-readable messages and can be easily propagated.
+//! All parsers now return the unified [`ParserError`] type. This error contains
+//! a human-readable message and can be propagated or logged.
 //!
 //! ```no_run
-//! use your_crate_name::Vob;
+//! use remata::{Vob, ParserError};
 //!
 //! match Vob::parse(&[]) {
 //!     Ok(meta) => println!("{}", meta),
@@ -129,13 +137,13 @@
 //!
 //! - Not all metadata fields are guaranteed to be present.
 //! - Unknown or unsupported tags are safely ignored.
-//! - Binary data (e.g. cover art) is exposed as raw bytes.
+//! - Binary data (e.g., cover art) is exposed as raw bytes.
 //!
 //! ---
 //!
 //! ## Re-exports
 //!
-//! This crate re-exports all metadata types at the root for convenience.
+//! All metadata types are re-exported at the crate root for convenience.
 mod error;
 mod readers;
 
