@@ -7,7 +7,7 @@ license = "MIT"
 description = "A Rust library for reading metadata from various media file formats."
 repository = "https://github.com/RoseBlume/remata"
 keywords = ["metadata", "audio", "video", "parser", "reader"]
-categories = ["audio", "video", "parsing"]
+categories = ["multimedia::audio", "parsing"]
 
 
 [[bin]]
