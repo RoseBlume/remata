@@ -136,7 +136,7 @@
 //! ## Re-exports
 //!
 //! This crate re-exports all metadata types at the root for convenience.
-
+mod error;
 mod readers;
 
 pub use readers::{
@@ -147,3 +147,4 @@ pub use readers::{
     Vob,
     AtomMeta,
 };
+pub use error::ParserError;

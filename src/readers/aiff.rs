@@ -1,6 +1,6 @@
 use std::io::{Cursor, Read, Seek, SeekFrom};
 use crate::Id3;
-
+use crate::ParserError;
 #[derive(Debug, Default)]
 pub struct AiffMeta {
     pub title: Option<String>,
@@ -41,7 +41,7 @@ impl Display for AiffMeta {
 }
 
 impl AiffMeta {
-    pub fn parse(data: &[u8]) -> Result<Self, AiffError> {
+    pub fn parse(data: &[u8]) -> Result<Self, ParserError> {
         let mut meta = AiffMeta::default();
         let mut cursor = Cursor::new(data);
 
@@ -109,16 +109,3 @@ fn bytes_to_string(data: &[u8]) -> String {
     String::from_utf8_lossy(data).trim_matches('\0').to_string()
 }
 
-// ------------------------
-// Error type
-// ------------------------
-#[derive(Debug)]
-pub struct AiffError {
-    pub message: String,
-}
-
-impl From<std::io::Error> for AiffError {
-    fn from(e: std::io::Error) -> Self {
-        AiffError { message: e.to_string() }
-    }
-}

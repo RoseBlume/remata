@@ -1,6 +1,6 @@
 use std::io::{Cursor, Read, Seek, SeekFrom};
 use std::fmt;
-
+use crate::ParserError;
 /// Represents metadata extracted from MP4/M4A "atom"-based containers.
 ///
 /// This struct maps common iTunes-style metadata atoms (©nam, ©ART, etc.)
@@ -162,7 +162,7 @@ impl AtomMeta {
     /// Supported:
     /// - Nested atoms (`moov`, `udta`, `meta`, `ilst`)
     /// - Common iTunes metadata keys
-    pub fn parse(data: &[u8]) -> Result<Self, AtomError> {
+    pub fn parse(data: &[u8]) -> Result<Self, ParserError> {
         let mut cursor = Cursor::new(data);
         let mut meta = AtomMeta::default();
 
@@ -235,7 +235,7 @@ impl AtomMeta {
 fn read_meta_entry(
     cursor: &mut Cursor<&[u8]>,
     size: u32
-) -> Result<Option<String>, AtomError> {
+) -> Result<Option<String>, ParserError> {
     let start = cursor.position();
 
     while (cursor.position() - start) < size as u64 {
@@ -270,33 +270,22 @@ fn read_meta_entry(
 }
 
 /// Reads a big-endian `u32`.
-fn read_u32(cursor: &mut Cursor<&[u8]>) -> Result<u32, AtomError> {
+fn read_u32(cursor: &mut Cursor<&[u8]>) -> Result<u32, ParserError> {
     let mut buf = [0u8; 4];
     cursor.read_exact(&mut buf)
-        .map_err(|e| AtomError { message: e.to_string() })?;
+        .map_err(|e| ParserError { message: e.to_string() })?;
     Ok(u32::from_be_bytes(buf))
 }
 
 /// Reads a 4-byte atom type identifier.
-fn read_type(cursor: &mut Cursor<&[u8]>) -> Result<[u8; 4], AtomError> {
+fn read_type(cursor: &mut Cursor<&[u8]>) -> Result<[u8; 4], ParserError> {
     let mut buf = [0u8; 4];
     cursor.read_exact(&mut buf)
-        .map_err(|e| AtomError { message: e.to_string() })?;
+        .map_err(|e| ParserError { message: e.to_string() })?;
     Ok(buf)
 }
 
-/// Error type used for atom parsing failures.
-#[derive(Debug)]
-pub struct AtomError {
-    /// Human-readable error message.
-    pub message: String,
-}
 
-impl From<std::io::Error> for AtomError {
-    fn from(e: std::io::Error) -> Self {
-        AtomError { message: e.to_string() }
-    }
-}
 
 /*
 | Element | FFmpeg Metadata Key | Description |

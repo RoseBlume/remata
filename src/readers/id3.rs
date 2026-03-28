@@ -1,6 +1,6 @@
 use std::io::{Cursor, Read};
 use std::fmt::{Display, Formatter, Result as FmtResult};
-
+use crate::ParserError;
 /// Represents either an ID3v1 or ID3v2 metadata block.
 ///
 /// This enum abstracts over the two major ID3 versions:
@@ -221,7 +221,7 @@ impl Id3 {
     /// Automatically detects:
     /// - ID3v2 (header starts with "ID3")
     /// - ID3v1 (footer at end of file)
-    pub fn parse(data: &[u8]) -> Result<Self, Id3Error> {
+    pub fn parse(data: &[u8]) -> Result<Self, ParserError> {
         if data.starts_with(b"ID3") {
             let mut meta = Id3V2::default();
             parse_id3v2(data, &mut meta)?;
@@ -241,7 +241,7 @@ impl Id3 {
 /// Parses ID3v2 frames and fills the provided [`Id3V2`] struct.
 ///
 /// Returns the end position of the tag.
-fn parse_id3v2(data: &[u8], meta: &mut Id3V2) -> Result<usize, Id3Error> {
+fn parse_id3v2(data: &[u8], meta: &mut Id3V2) -> Result<usize, ParserError> {
     let mut cur = Cursor::new(data);
     cur.set_position(3);
 
@@ -338,9 +338,3 @@ fn decode_text(data: &[u8]) -> Option<String> {
     Some(String::from_utf8_lossy(data).trim_matches('\0').to_string())
 }
 
-/// Error type for ID3 parsing failures.
-#[derive(Debug)]
-pub struct Id3Error {
-    /// Human-readable error message.
-    pub message: String,
-}

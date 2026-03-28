@@ -1,5 +1,5 @@
 use std::fmt;
-
+use crate::ParserError;
 /// Represents metadata extracted from FLAC or Ogg/Vorbis containers.
 ///
 /// This struct is a normalized view over Vorbis-style comments, mapping
@@ -203,25 +203,25 @@ impl Vob {
     /// let meta = Vob::parse(&bytes)?;
     /// println!("{}", meta);
     /// ```
-    pub fn parse(data: &[u8]) -> Result<Self, VobError> {
+    pub fn parse(data: &[u8]) -> Result<Self, ParserError> {
         if data.starts_with(b"fLaC") {
             parse_flac(data)
         } else if data.starts_with(b"OggS") {
             parse_ogg(data)
         } else {
-            Err(VobError { message: "Unsupported audio format".to_string() })
+            Err(ParserError { message: "Unsupported audio format".to_string() })
         }
     }
 }
 
 /// Parses FLAC metadata blocks and extracts Vorbis comments.
-fn parse_flac(data: &[u8]) -> Result<Vob, VobError> {
+fn parse_flac(data: &[u8]) -> Result<Vob, ParserError> {
     let mut offset = 4;
     let mut vob = Vob::default();
 
     loop {
         if offset + 4 > data.len() {
-            return Err(VobError { message: "Unexpected EOF in FLAC metadata".to_string() });
+            return Err(ParserError { message: "Unexpected EOF in FLAC metadata".to_string() });
         }
 
         let header = data[offset];
@@ -247,7 +247,7 @@ fn parse_flac(data: &[u8]) -> Result<Vob, VobError> {
 }
 
 /// Parses Ogg container pages and extracts Vorbis comment packets.
-fn parse_ogg(data: &[u8]) -> Result<Vob, VobError> {
+fn parse_ogg(data: &[u8]) -> Result<Vob, ParserError> {
     let mut offset = 0;
     let mut vob = Vob::default();
 
@@ -286,7 +286,7 @@ fn parse_ogg(data: &[u8]) -> Result<Vob, VobError> {
 /// Parses Vorbis comment block and populates [`Vob`].
 ///
 /// Comments are in `KEY=VALUE` format.
-fn parse_vorbis_comments(block: &[u8], vob: &mut Vob) -> Result<(), VobError> {
+fn parse_vorbis_comments(block: &[u8], vob: &mut Vob) -> Result<(), ParserError> {
     let mut offset = 0;
 
     if offset + 4 > block.len() { return Ok(()); }
@@ -309,7 +309,7 @@ fn parse_vorbis_comments(block: &[u8], vob: &mut Vob) -> Result<(), VobError> {
         if offset + len > block.len() { break; }
 
         let comment = std::str::from_utf8(&block[offset..offset+len])
-            .map_err(|e| VobError { message: format!("UTF-8 error: {}", e) })?;
+            .map_err(|e| ParserError { message: format!("UTF-8 error: {}", e) })?;
         offset += len;
 
         if let Some((tag, value)) = comment.split_once('=') {
@@ -364,12 +364,7 @@ fn decode_base64(input: &str) -> Option<Vec<u8>> {
     Some(result)
 }
 
-/// Error type for Vob parsing.
-#[derive(Debug)]
-pub struct VobError {
-    /// Human-readable error message.
-    pub message: String,
-}
+
 /*
 Tag ID	Tag Name	Writable	Values / Notes
 'ACTOR'	Actor	no	 

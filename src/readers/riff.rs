@@ -1,3 +1,4 @@
+use crate::ParserError;
 /// Represents metadata extracted from RIFF INFO chunks.
 ///
 /// RIFF (Resource Interchange File Format) is used by formats like WAV and AVI.
@@ -225,7 +226,7 @@ impl RiffMeta {
     /// - Parses all RIFF chunks recursively
     /// - Extracts `LIST/INFO` chunks
     /// - Decodes key-value metadata entries
-    pub fn parse(data: &[u8]) -> Result<Self, RiffError> {
+    pub fn parse(data: &[u8]) -> Result<Self, ParserError> {
         let chunks = parse_riff_chunks(data)?;
         let info_chunks = find_info_chunks(&chunks);
 
@@ -241,12 +242,12 @@ impl RiffMeta {
                 let len = u32::from_le_bytes(
                     info[i..i + 4]
                         .try_into()
-                        .map_err(|_| RiffError { message: "Invalid entry length".into() })?,
+                        .map_err(|_| ParserError { message: "Invalid entry length".into() })?,
                 ) as usize;
                 i += 4;
 
                 if i + len > info.len() {
-                    return Err(RiffError {
+                    return Err(ParserError {
                         message: "Entry out of bounds".into(),
                     });
                 }
@@ -278,18 +279,7 @@ impl RiffMeta {
     }
 }
 
-/// Error type for RIFF parsing failures.
-#[derive(Debug)]
-pub struct RiffError {
-    /// Human-readable error message.
-    pub message: String,
-}
 
-impl From<std::io::Error> for RiffError {
-    fn from(e: std::io::Error) -> Self {
-        RiffError { message: e.to_string() }
-    }
-}
 
 /// Represents a single RIFF chunk.
 ///
@@ -310,25 +300,25 @@ pub struct RiffChunk<'a> {
 /// - Iterates through chunks
 /// - Validates bounds
 /// - Recursively parses nested `RIFF` and `LIST` chunks
-pub fn parse_riff_chunks<'a>(data: &'a [u8]) -> Result<Vec<RiffChunk<'a>>, RiffError> {
+pub fn parse_riff_chunks<'a>(data: &'a [u8]) -> Result<Vec<RiffChunk<'a>>, ParserError> {
     let mut chunks = Vec::new();
     let mut i = 0;
 
     while i + 8 <= data.len() {
         let id: [u8; 4] = data[i..i + 4]
             .try_into()
-            .map_err(|_| RiffError { message: "Invalid chunk id".into() })?;
+            .map_err(|_| ParserError { message: "Invalid chunk id".into() })?;
 
         let size = u32::from_le_bytes(
             data[i + 4..i + 8]
                 .try_into()
-                .map_err(|_| RiffError { message: "Invalid chunk size".into() })?,
+                .map_err(|_| ParserError { message: "Invalid chunk size".into() })?,
         ) as usize;
 
         i += 8;
 
         if i + size > data.len() {
-            return Err(RiffError {
+            return Err(ParserError {
                 message: "Chunk out of bounds".into(),
             });
         }

@@ -1,6 +1,6 @@
 use std::io::{Cursor, Read};
 use std::fmt;
-
+use crate::ParserError;
 // ------------------------
 // GUIDs
 // ------------------------
@@ -223,7 +223,7 @@ impl AsfMeta {
     /// - Validates the ASF header
     /// - Iterates over ASF objects
     /// - Extracts content and extended metadata
-    pub fn parse(data: &[u8]) -> Result<Self, AsfError> {
+    pub fn parse(data: &[u8]) -> Result<Self, ParserError> {
         let mut cursor = Cursor::new(data);
         let mut meta = AsfMeta::default();
 
@@ -231,7 +231,7 @@ impl AsfMeta {
         cursor.read_exact(&mut guid)?;
 
         if guid != ASF_HEADER_OBJECT {
-            return Err(AsfError::new("Not ASF"));
+            return Err(ParserError::new("Not ASF"));
         }
 
         let _header_size = read_u64(&mut cursor)?;
@@ -265,7 +265,7 @@ impl AsfMeta {
 // ------------------------
 
 /// Parses the Content Description object (basic metadata).
-fn parse_content_description(cursor: &mut Cursor<&[u8]>, meta: &mut AsfMeta) -> Result<(), AsfError> {
+fn parse_content_description(cursor: &mut Cursor<&[u8]>, meta: &mut AsfMeta) -> Result<(), ParserError> {
     let title_len = read_u16(cursor)? as usize;
     let author_len = read_u16(cursor)? as usize;
     let _ = read_u16(cursor)?;
@@ -283,7 +283,7 @@ fn parse_content_description(cursor: &mut Cursor<&[u8]>, meta: &mut AsfMeta) -> 
 }
 
 /// Parses the Extended Content Description object (WM/* metadata).
-fn parse_extended_description(cursor: &mut Cursor<&[u8]>, meta: &mut AsfMeta) -> Result<(), AsfError> {
+fn parse_extended_description(cursor: &mut Cursor<&[u8]>, meta: &mut AsfMeta) -> Result<(), ParserError> {
     let count = read_u16(cursor)?;
 
     for _ in 0..count {
@@ -361,27 +361,27 @@ fn set_binary(m: &mut AsfMeta, k: &str, v: Vec<u8>) {
 // ------------------------
 
 /// Reads a single byte.
-fn read_u8(c: &mut Cursor<&[u8]>) -> Result<u8, AsfError> {
+fn read_u8(c: &mut Cursor<&[u8]>) -> Result<u8, ParserError> {
     let mut b = [0;1]; c.read_exact(&mut b)?; Ok(b[0])
 }
 
 /// Reads a little-endian `u16`.
-fn read_u16(c: &mut Cursor<&[u8]>) -> Result<u16, AsfError> {
+fn read_u16(c: &mut Cursor<&[u8]>) -> Result<u16, ParserError> {
     let mut b = [0;2]; c.read_exact(&mut b)?; Ok(u16::from_le_bytes(b))
 }
 
 /// Reads a little-endian `u32`.
-fn read_u32(c: &mut Cursor<&[u8]>) -> Result<u32, AsfError> {
+fn read_u32(c: &mut Cursor<&[u8]>) -> Result<u32, ParserError> {
     let mut b = [0;4]; c.read_exact(&mut b)?; Ok(u32::from_le_bytes(b))
 }
 
 /// Reads a little-endian `u64`.
-fn read_u64(c: &mut Cursor<&[u8]>) -> Result<u64, AsfError> {
+fn read_u64(c: &mut Cursor<&[u8]>) -> Result<u64, ParserError> {
     let mut b = [0;8]; c.read_exact(&mut b)?; Ok(u64::from_le_bytes(b))
 }
 
 /// Reads a UTF-16LE string of a given byte length.
-fn read_utf16(c: &mut Cursor<&[u8]>, len: usize) -> Result<String, AsfError> {
+fn read_utf16(c: &mut Cursor<&[u8]>, len: usize) -> Result<String, ParserError> {
     let mut buf = vec![0; len];
     c.read_exact(&mut buf)?;
 
@@ -395,29 +395,12 @@ fn read_utf16(c: &mut Cursor<&[u8]>, len: usize) -> Result<String, AsfError> {
 }
 
 /// Skips a number of bytes in the cursor.
-fn skip_bytes(c: &mut Cursor<&[u8]>, len: usize) -> Result<(), AsfError> {
+fn skip_bytes(c: &mut Cursor<&[u8]>, len: usize) -> Result<(), ParserError> {
     c.set_position(c.position() + len as u64);
     Ok(())
 }
 
-// ------------------------
-// Error
-// ------------------------
 
-/// Error type used for ASF parsing failures.
-#[derive(Debug)]
-pub struct AsfError { pub message: String }
-
-impl AsfError {
-    /// Creates a new ASF error with a message.
-    fn new(msg: &str) -> Self { Self { message: msg.into() } }
-}
-
-impl From<std::io::Error> for AsfError {
-    fn from(e: std::io::Error) -> Self {
-        AsfError { message: e.to_string() }
-    }
-}
 /*
 ASF ExtendedDescr Tags
 
