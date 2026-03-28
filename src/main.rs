@@ -9,12 +9,7 @@ use remata::{
     AiffMeta,
     Vob
 };
-// use mata_atoms::AtomMeta; // your new MP4/M4A parser
-// use mata_id3::Id3;        // still handling ID3
-// use mata_vob::Vob;        // still handling VOB
-// use mata_aiff::AiffMeta;  // still handling AIFF
-// use mata_asf::AsfMeta;    // still handling ASF
-// use mata_riff::RiffMeta;  // still handling RIFF
+
 pub enum Meta {
     Atom(AtomMeta),
     Id3(Id3),
