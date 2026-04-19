@@ -1,0 +1,7 @@
+[package]
+name = "mataaudio"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+remata-audio = { path = "../../remata-audio" }

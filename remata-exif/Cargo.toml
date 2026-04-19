@@ -1,0 +1,8 @@
+[package]
+name = "remata-exif"
+version = "1.0.0"
+edition = "2024"
+
+[dependencies]
+remata-core = { path = "../remata-core", version = "1.0.0"}
+remata-macros = { path = "../macros/remata-macros", version = "1.0.0"}

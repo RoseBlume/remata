@@ -1,0 +1,3562 @@
+pub const INTEROPINDEX: u16 = 1u16;
+pub const PROCESSINGSOFTWARE: u16 = 11u16;
+pub const SUBFILETYPE: u16 = 254u16;
+pub const OLDSUBFILETYPE: u16 = 255u16;
+pub const IMAGEWIDTH: u16 = 256u16;
+pub const IMAGEHEIGHT: u16 = 257u16;
+pub const BITSPERSAMPLE: u16 = 258u16;
+pub const COMPRESSION: u16 = 259u16;
+pub const PHOTOMETRICINTERPRETATION: u16 = 262u16;
+pub const THRESHOLDING: u16 = 263u16;
+pub const CELLWIDTH: u16 = 264u16;
+pub const CELLLENGTH: u16 = 265u16;
+pub const FILLORDER: u16 = 266u16;
+pub const DOCUMENTNAME: u16 = 269u16;
+pub const IMAGEDESCRIPTION: u16 = 270u16;
+pub const MAKE: u16 = 271u16;
+pub const MODEL: u16 = 272u16;
+pub const ORIENTATION: u16 = 274u16;
+pub const SAMPLESPERPIXEL: u16 = 277u16;
+pub const ROWSPERSTRIP: u16 = 278u16;
+pub const MINSAMPLEVALUE: u16 = 280u16;
+pub const MAXSAMPLEVALUE: u16 = 281u16;
+pub const XRESOLUTION: u16 = 282u16;
+pub const YRESOLUTION: u16 = 283u16;
+pub const PLANARCONFIGURATION: u16 = 284u16;
+pub const PAGENAME: u16 = 285u16;
+pub const XPOSITION: u16 = 286u16;
+pub const YPOSITION: u16 = 287u16;
+pub const GRAYRESPONSEUNIT: u16 = 290u16;
+pub const RESOLUTIONUNIT: u16 = 296u16;
+pub const PAGENUMBER: u16 = 297u16;
+pub const TRANSFERFUNCTION: u16 = 301u16;
+pub const SOFTWARE: u16 = 305u16;
+pub const MODIFYDATE: u16 = 306u16;
+pub const ARTIST: u16 = 315u16;
+pub const HOSTCOMPUTER: u16 = 316u16;
+pub const PREDICTOR: u16 = 317u16;
+pub const WHITEPOINT: u16 = 318u16;
+pub const PRIMARYCHROMATICITIES: u16 = 319u16;
+pub const HALFTONEHINTS: u16 = 321u16;
+pub const TILEWIDTH: u16 = 322u16;
+pub const TILELENGTH: u16 = 323u16;
+pub const INKSET: u16 = 332u16;
+pub const TARGETPRINTER: u16 = 337u16;
+pub const YCBCRCOEFFICIENTS: u16 = 529u16;
+pub const YCBCRPOSITIONING: u16 = 531u16;
+pub const REFERENCEBLACKWHITE: u16 = 532u16;
+pub const APPLICATIONNOTES: u16 = 700u16;
+pub const RELATEDIMAGEFILEFORMAT: u16 = 4096u16;
+pub const RELATEDIMAGEWIDTH: u16 = 4097u16;
+pub const RELATEDIMAGEHEIGHT: u16 = 4098u16;
+pub const RATING: u16 = 18246u16;
+pub const RATINGPERCENT: u16 = 18249u16;
+pub const VIGNETTINGCORRECTION: u16 = 28721u16;
+pub const VIGNETTINGCORRPARAMS: u16 = 28722u16;
+pub const CHROMATICABERRATIONCORRECTION: u16 = 28724u16;
+pub const CHROMATICABERRATIONCORRPARAMS: u16 = 28725u16;
+pub const DISTORTIONCORRECTION: u16 = 28726u16;
+pub const DISTORTIONCORRPARAMS: u16 = 28727u16;
+pub const SONYRAWIMAGESIZE: u16 = 28728u16;
+pub const BLACKLEVEL: u16 = 29456u16;
+pub const WB_RGGBLEVELS: u16 = 29459u16;
+pub const SONYCROPTOPLEFT: u16 = 29895u16;
+pub const SONYCROPSIZE: u16 = 29896u16;
+pub const CFAREPEATPATTERNDIM: u16 = 33421u16;
+pub const CFAPATTERN2: u16 = 33422u16;
+pub const COPYRIGHT: u16 = 33432u16;
+pub const EXPOSURETIME: u16 = 33434u16;
+pub const FNUMBER: u16 = 33437u16;
+pub const PIXELSCALE: u16 = 33550u16;
+pub const IPTC_NAA: u16 = 33723u16;
+pub const INTERGRAPHMATRIX: u16 = 33920u16;
+pub const MODELTIEPOINT: u16 = 33922u16;
+pub const SEMINFO: u16 = 34118u16;
+pub const MODELTRANSFORM: u16 = 34264u16;
+pub const GEOTIFFDIRECTORY: u16 = 34735u16;
+pub const GEOTIFFDOUBLEPARAMS: u16 = 34736u16;
+pub const GEOTIFFASCIIPARAMS: u16 = 34737u16;
+pub const EXPOSUREPROGRAM: u16 = 34850u16;
+pub const SPECTRALSENSITIVITY: u16 = 34852u16;
+pub const ISO: u16 = 34855u16;
+pub const TIMEZONEOFFSET: u16 = 34858u16;
+pub const SELFTIMERMODE: u16 = 34859u16;
+pub const SENSITIVITYTYPE: u16 = 34864u16;
+pub const STANDARDOUTPUTSENSITIVITY: u16 = 34865u16;
+pub const RECOMMENDEDEXPOSUREINDEX: u16 = 34866u16;
+pub const ISOSPEED: u16 = 34867u16;
+pub const ISOSPEEDLATITUDEYYY: u16 = 34868u16;
+pub const ISOSPEEDLATITUDEZZZ: u16 = 34869u16;
+pub const DATETIMEORIGINAL: u16 = 36867u16;
+pub const CREATEDATE: u16 = 36868u16;
+pub const OFFSETTIME: u16 = 36880u16;
+pub const OFFSETTIMEORIGINAL: u16 = 36881u16;
+pub const OFFSETTIMEDIGITIZED: u16 = 36882u16;
+pub const COMPRESSEDBITSPERPIXEL: u16 = 37122u16;
+pub const SHUTTERSPEEDVALUE: u16 = 37377u16;
+pub const APERTUREVALUE: u16 = 37378u16;
+pub const BRIGHTNESSVALUE: u16 = 37379u16;
+pub const EXPOSURECOMPENSATION: u16 = 37380u16;
+pub const MAXAPERTUREVALUE: u16 = 37381u16;
+pub const SUBJECTDISTANCE: u16 = 37382u16;
+pub const METERINGMODE: u16 = 37383u16;
+pub const LIGHTSOURCE: u16 = 37384u16;
+pub const FLASH: u16 = 37385u16;
+pub const FOCALLENGTH: u16 = 37386u16;
+pub const IMAGENUMBER: u16 = 37393u16;
+pub const SECURITYCLASSIFICATION: u16 = 37394u16;
+pub const IMAGEHISTORY: u16 = 37395u16;
+pub const SUBJECTAREA: u16 = 37396u16;
+pub const SUBSECTIME: u16 = 37520u16;
+pub const SUBSECTIMEORIGINAL: u16 = 37521u16;
+pub const SUBSECTIMEDIGITIZED: u16 = 37522u16;
+pub const AMBIENTTEMPERATURE: u16 = 37888u16;
+pub const HUMIDITY: u16 = 37889u16;
+pub const PRESSURE: u16 = 37890u16;
+pub const WATERDEPTH: u16 = 37891u16;
+pub const ACCELERATION: u16 = 37892u16;
+pub const CAMERAELEVATIONANGLE: u16 = 37893u16;
+pub const XIAOMISETTINGS: u16 = 39321u16;
+pub const XIAOMIMODEL: u16 = 39424u16;
+pub const XPTITLE: u16 = 40091u16;
+pub const XPCOMMENT: u16 = 40092u16;
+pub const XPAUTHOR: u16 = 40093u16;
+pub const XPKEYWORDS: u16 = 40094u16;
+pub const XPSUBJECT: u16 = 40095u16;
+pub const COLORSPACE: u16 = 40961u16;
+pub const EXIFIMAGEWIDTH: u16 = 40962u16;
+pub const EXIFIMAGEHEIGHT: u16 = 40963u16;
+pub const RELATEDSOUNDFILE: u16 = 40964u16;
+pub const SUBJECTLOCATION: u16 = 41492u16;
+pub const CUSTOMRENDERED: u16 = 41985u16;
+pub const EXPOSUREMODE: u16 = 41986u16;
+pub const WHITEBALANCE: u16 = 41987u16;
+pub const DIGITALZOOMRATIO: u16 = 41988u16;
+pub const FOCALLENGTHIN35MMFORMAT: u16 = 41989u16;
+pub const SCENECAPTURETYPE: u16 = 41990u16;
+pub const GAINCONTROL: u16 = 41991u16;
+pub const CONTRAST: u16 = 41992u16;
+pub const SATURATION: u16 = 41993u16;
+pub const SHARPNESS: u16 = 41994u16;
+pub const SUBJECTDISTANCERANGE: u16 = 41996u16;
+pub const IMAGEUNIQUEID: u16 = 42016u16;
+pub const OWNERNAME: u16 = 42032u16;
+pub const SERIALNUMBER: u16 = 42033u16;
+pub const LENSINFO: u16 = 42034u16;
+pub const LENSMAKE: u16 = 42035u16;
+pub const LENSMODEL: u16 = 42036u16;
+pub const LENSSERIALNUMBER: u16 = 42037u16;
+pub const IMAGETITLE: u16 = 42038u16;
+pub const PHOTOGRAPHER: u16 = 42039u16;
+pub const IMAGEEDITOR: u16 = 42040u16;
+pub const CAMERAFIRMWARE: u16 = 42041u16;
+pub const RAWDEVELOPINGSOFTWARE: u16 = 42042u16;
+pub const IMAGEEDITINGSOFTWARE: u16 = 42043u16;
+pub const METADATAEDITINGSOFTWARE: u16 = 42044u16;
+pub const COMPOSITEIMAGE: u16 = 42080u16;
+pub const COMPOSITEIMAGECOUNT: u16 = 42081u16;
+pub const GDALMETADATA: u16 = 42112u16;
+pub const GDALNODATA: u16 = 42113u16;
+pub const GAMMA: u16 = 42240u16;
+pub const DNGVERSION: u16 = 50706u16;
+pub const DNGBACKWARDVERSION: u16 = 50707u16;
+pub const UNIQUECAMERAMODEL: u16 = 50708u16;
+pub const LOCALIZEDCAMERAMODEL: u16 = 50709u16;
+pub const LINEARIZATIONTABLE: u16 = 50712u16;
+pub const BLACKLEVELREPEATDIM: u16 = 50713u16;
+pub const BLACKLEVELDELTAH: u16 = 50715u16;
+pub const BLACKLEVELDELTAV: u16 = 50716u16;
+pub const WHITELEVEL: u16 = 50717u16;
+pub const DEFAULTSCALE: u16 = 50718u16;
+pub const DEFAULTCROPORIGIN: u16 = 50719u16;
+pub const DEFAULTCROPSIZE: u16 = 50720u16;
+pub const COLORMATRIX1: u16 = 50721u16;
+pub const COLORMATRIX2: u16 = 50722u16;
+pub const CAMERACALIBRATION1: u16 = 50723u16;
+pub const CAMERACALIBRATION2: u16 = 50724u16;
+pub const REDUCTIONMATRIX1: u16 = 50725u16;
+pub const REDUCTIONMATRIX2: u16 = 50726u16;
+pub const ANALOGBALANCE: u16 = 50727u16;
+pub const ASSHOTNEUTRAL: u16 = 50728u16;
+pub const ASSHOTWHITEXY: u16 = 50729u16;
+pub const BASELINEEXPOSURE: u16 = 50730u16;
+pub const BASELINENOISE: u16 = 50731u16;
+pub const BASELINESHARPNESS: u16 = 50732u16;
+pub const BAYERGREENSPLIT: u16 = 50733u16;
+pub const LINEARRESPONSELIMIT: u16 = 50734u16;
+pub const CAMERASERIALNUMBER: u16 = 50735u16;
+pub const DNGLENSINFO: u16 = 50736u16;
+pub const CHROMABLURRADIUS: u16 = 50737u16;
+pub const ANTIALIASSTRENGTH: u16 = 50738u16;
+pub const SHADOWSCALE: u16 = 50739u16;
+pub const MAKERNOTESAFETY: u16 = 50741u16;
+pub const CALIBRATIONILLUMINANT1: u16 = 50778u16;
+pub const CALIBRATIONILLUMINANT2: u16 = 50779u16;
+pub const BESTQUALITYSCALE: u16 = 50780u16;
+pub const RAWDATAUNIQUEID: u16 = 50781u16;
+pub const ORIGINALRAWFILENAME: u16 = 50827u16;
+pub const ACTIVEAREA: u16 = 50829u16;
+pub const MASKEDAREAS: u16 = 50830u16;
+pub const ASSHOTPREPROFILEMATRIX: u16 = 50832u16;
+pub const CURRENTPREPROFILEMATRIX: u16 = 50834u16;
+pub const COLORIMETRICREFERENCE: u16 = 50879u16;
+pub const CAMERACALIBRATIONSIG: u16 = 50931u16;
+pub const PROFILECALIBRATIONSIG: u16 = 50932u16;
+pub const ASSHOTPROFILENAME: u16 = 50934u16;
+pub const NOISEREDUCTIONAPPLIED: u16 = 50935u16;
+pub const PROFILENAME: u16 = 50936u16;
+pub const PROFILEHUESATMAPDIMS: u16 = 50937u16;
+pub const PROFILEHUESATMAPDATA1: u16 = 50938u16;
+pub const PROFILEHUESATMAPDATA2: u16 = 50939u16;
+pub const PROFILETONECURVE: u16 = 50940u16;
+pub const PROFILEEMBEDPOLICY: u16 = 50941u16;
+pub const PROFILECOPYRIGHT: u16 = 50942u16;
+pub const FORWARDMATRIX1: u16 = 50964u16;
+pub const FORWARDMATRIX2: u16 = 50965u16;
+pub const PREVIEWAPPLICATIONNAME: u16 = 50966u16;
+pub const PREVIEWAPPLICATIONVERSION: u16 = 50967u16;
+pub const PREVIEWSETTINGSNAME: u16 = 50968u16;
+pub const PREVIEWSETTINGSDIGEST: u16 = 50969u16;
+pub const PREVIEWCOLORSPACE: u16 = 50970u16;
+pub const PREVIEWDATETIME: u16 = 50971u16;
+pub const RAWIMAGEDIGEST: u16 = 50972u16;
+pub const ORIGINALRAWFILEDIGEST: u16 = 50973u16;
+pub const PROFILELOOKTABLEDIMS: u16 = 50981u16;
+pub const PROFILELOOKTABLEDATA: u16 = 50982u16;
+pub const NOISEPROFILE: u16 = 51041u16;
+pub const TIMECODES: u16 = 51043u16;
+pub const FRAMERATE: u16 = 51044u16;
+pub const TSTOP: u16 = 51058u16;
+pub const REELNAME: u16 = 51081u16;
+pub const ORIGINALDEFAULTFINALSIZE: u16 = 51089u16;
+pub const ORIGINALBESTQUALITYSIZE: u16 = 51090u16;
+pub const ORIGINALDEFAULTCROPSIZE: u16 = 51091u16;
+pub const CAMERALABEL: u16 = 51105u16;
+pub const PROFILEHUESATMAPENCODING: u16 = 51107u16;
+pub const PROFILELOOKTABLEENCODING: u16 = 51108u16;
+pub const BASELINEEXPOSUREOFFSET: u16 = 51109u16;
+pub const DEFAULTBLACKRENDER: u16 = 51110u16;
+pub const NEWRAWIMAGEDIGEST: u16 = 51111u16;
+pub const RAWTOPREVIEWGAIN: u16 = 51112u16;
+pub const CACHEVERSION: u16 = 51114u16;
+pub const DEFAULTUSERCROP: u16 = 51125u16;
+pub const DEPTHFORMAT: u16 = 51177u16;
+pub const DEPTHNEAR: u16 = 51178u16;
+pub const DEPTHFAR: u16 = 51179u16;
+pub const DEPTHUNITS: u16 = 51180u16;
+pub const DEPTHMEASURETYPE: u16 = 51181u16;
+pub const ENHANCEPARAMS: u16 = 51182u16;
+pub const CALIBRATIONILLUMINANT3: u16 = 52529u16;
+pub const CAMERACALIBRATION3: u16 = 52530u16;
+pub const COLORMATRIX3: u16 = 52531u16;
+pub const FORWARDMATRIX3: u16 = 52532u16;
+pub const PROFILEHUESATMAPDATA3: u16 = 52537u16;
+pub const REDUCTIONMATRIX3: u16 = 52538u16;
+pub const COLUMNINTERLEAVEFACTOR: u16 = 52547u16;
+pub const PROFILEGROUPNAME: u16 = 52552u16;
+pub const JXLDISTANCE: u16 = 52553u16;
+pub const JXLEFFORT: u16 = 52554u16;
+pub const JXLDECODESPEED: u16 = 52555u16;
+pub const SEAL: u16 = 52897u16;
+pub const OFFSETSCHEMA: u16 = 59933u16;
+pub const LENS: u16 = 65002u16;
+pub const RAWFILE: u16 = 65100u16;
+pub const CONVERTER: u16 = 65101u16;
+pub const EXPOSURE: u16 = 65105u16;
+pub const SHADOWS: u16 = 65106u16;
+pub const BRIGHTNESS: u16 = 65107u16;
+pub const SMOOTHNESS: u16 = 65111u16;
+pub const MOIREFILTER: u16 = 65112u16;
+
+pub fn registry() -> &'static [(u16, fn(&mut Exif, &[u8]))] {
+    &[
+        (
+            1u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.interopindex = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            11u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.processingsoftware = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            254u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.subfiletype = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            255u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.oldsubfiletype = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            256u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.imagewidth = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            257u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.imageheight = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            258u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.bitspersample = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 1f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            259u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.compression = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            262u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.photometricinterpretation = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            263u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.thresholding = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            264u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.cellwidth = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            265u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.celllength = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            266u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.fillorder = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            269u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.documentname = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            270u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.imagedescription = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            271u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.make = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            272u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.model = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            274u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.orientation = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            277u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.samplesperpixel = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            278u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.rowsperstrip = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            280u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.minsamplevalue = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            281u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.maxsamplevalue = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            282u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.xresolution = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            283u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.yresolution = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            284u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.planarconfiguration = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            285u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.pagename = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            286u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.xposition = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            287u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.yposition = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            290u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.grayresponseunit = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            296u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.resolutionunit = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            297u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.pagenumber = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 2f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            301u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.transferfunction = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 768f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            305u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.software = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            306u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.modifydate = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            315u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.artist = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            316u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.hostcomputer = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            317u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.predictor = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            318u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.whitepoint = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 2f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            319u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.primarychromaticities = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 6f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            321u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.halftonehints = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 2f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            322u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.tilewidth = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            323u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.tilelength = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            332u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.inkset = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            337u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.targetprinter = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            529u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.ycbcrcoefficients = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 3f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            531u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.ycbcrpositioning = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            532u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.referenceblackwhite = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 6f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            700u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = v[0] as f64;
+                    exif.applicationnotes = Some(((val as f64) * 1f64) as u8);
+                }
+            },
+        ),
+        (
+            4096u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.relatedimagefileformat = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            4097u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.relatedimagewidth = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            4098u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.relatedimageheight = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            18246u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.rating = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            18249u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.ratingpercent = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            28721u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.vignettingcorrection = Some(
+                        ((val as f64) * 1f64) as i16,
+                    );
+                }
+            },
+        ),
+        (
+            28722u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.vignettingcorrparams = Some(
+                    v
+                        .chunks(std::mem::size_of::<i16>())
+                        .map(|v| {
+                            let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 17f64) as i16
+                        })
+                        .collect::<Vec<i16>>(),
+                );
+            },
+        ),
+        (
+            28724u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.chromaticaberrationcorrection = Some(
+                        ((val as f64) * 1f64) as i16,
+                    );
+                }
+            },
+        ),
+        (
+            28725u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.chromaticaberrationcorrparams = Some(
+                    v
+                        .chunks(std::mem::size_of::<i16>())
+                        .map(|v| {
+                            let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 33f64) as i16
+                        })
+                        .collect::<Vec<i16>>(),
+                );
+            },
+        ),
+        (
+            28726u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.distortioncorrection = Some(
+                        ((val as f64) * 1f64) as i16,
+                    );
+                }
+            },
+        ),
+        (
+            28727u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.distortioncorrparams = Some(
+                    v
+                        .chunks(std::mem::size_of::<i16>())
+                        .map(|v| {
+                            let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 17f64) as i16
+                        })
+                        .collect::<Vec<i16>>(),
+                );
+            },
+        ),
+        (
+            28728u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.sonyrawimagesize = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 2f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            29456u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.blacklevel = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 4f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            29459u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.wb_rggblevels = Some(
+                    v
+                        .chunks(std::mem::size_of::<i16>())
+                        .map(|v| {
+                            let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 4f64) as i16
+                        })
+                        .collect::<Vec<i16>>(),
+                );
+            },
+        ),
+        (
+            29895u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.sonycroptopleft = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 2f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            29896u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.sonycropsize = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 2f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            33421u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cfarepeatpatterndim = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 2f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            33422u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cfapattern2 = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 1f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            33432u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.copyright = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            33434u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.exposuretime = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            33437u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.fnumber = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            33550u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.pixelscale = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = f64::from_le_bytes(v[..8].try_into().unwrap());
+                            ((val as f64) * 3f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            33723u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.iptc_naa = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            33920u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.intergraphmatrix = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = f64::from_le_bytes(v[..8].try_into().unwrap());
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            33922u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.modeltiepoint = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = f64::from_le_bytes(v[..8].try_into().unwrap());
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            34118u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.seminfo = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            34264u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.modeltransform = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = f64::from_le_bytes(v[..8].try_into().unwrap());
+                            ((val as f64) * 16f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            34735u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.geotiffdirectory = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 0.5f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            34736u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.geotiffdoubleparams = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = f64::from_le_bytes(v[..8].try_into().unwrap());
+                            ((val as f64) * 0.125f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            34737u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.geotiffasciiparams = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            34850u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.exposureprogram = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            34852u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.spectralsensitivity = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            34855u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.iso = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 1f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            34858u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.timezoneoffset = Some(
+                    v
+                        .chunks(std::mem::size_of::<i16>())
+                        .map(|v| {
+                            let val = i16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 1f64) as i16
+                        })
+                        .collect::<Vec<i16>>(),
+                );
+            },
+        ),
+        (
+            34859u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.selftimermode = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            34864u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.sensitivitytype = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            34865u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.standardoutputsensitivity = Some(
+                        ((val as f64) * 1f64) as u32,
+                    );
+                }
+            },
+        ),
+        (
+            34866u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.recommendedexposureindex = Some(
+                        ((val as f64) * 1f64) as u32,
+                    );
+                }
+            },
+        ),
+        (
+            34867u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.isospeed = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            34868u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.isospeedlatitudeyyy = Some(
+                        ((val as f64) * 1f64) as u32,
+                    );
+                }
+            },
+        ),
+        (
+            34869u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.isospeedlatitudezzz = Some(
+                        ((val as f64) * 1f64) as u32,
+                    );
+                }
+            },
+        ),
+        (
+            36867u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.datetimeoriginal = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            36868u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.createdate = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            36880u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.offsettime = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            36881u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.offsettimeoriginal = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            36882u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.offsettimedigitized = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            37122u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.compressedbitsperpixel = Some(
+                        ((val as f64) * 1f64) as f64,
+                    );
+                }
+            },
+        ),
+        (
+            37377u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.shutterspeedvalue = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37378u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.aperturevalue = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37379u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.brightnessvalue = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37380u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.exposurecompensation = Some(
+                        ((val as f64) * 1f64) as f64,
+                    );
+                }
+            },
+        ),
+        (
+            37381u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.maxaperturevalue = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37382u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.subjectdistance = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37383u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.meteringmode = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            37384u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.lightsource = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            37385u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.flash = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            37386u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.focallength = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37393u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.imagenumber = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            37394u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.securityclassification = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            37395u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.imagehistory = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            37396u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.subjectarea = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 1f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            37520u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.subsectime = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            37521u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.subsectimeoriginal = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            37522u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.subsectimedigitized = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            37888u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.ambienttemperature = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37889u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.humidity = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37890u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.pressure = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37891u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.waterdepth = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37892u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.acceleration = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            37893u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.cameraelevationangle = Some(
+                        ((val as f64) * 1f64) as f64,
+                    );
+                }
+            },
+        ),
+        (
+            39321u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.xiaomisettings = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            39424u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.xiaomimodel = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            40091u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = v[0] as f64;
+                    exif.xptitle = Some(((val as f64) * 1f64) as u8);
+                }
+            },
+        ),
+        (
+            40092u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = v[0] as f64;
+                    exif.xpcomment = Some(((val as f64) * 1f64) as u8);
+                }
+            },
+        ),
+        (
+            40093u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = v[0] as f64;
+                    exif.xpauthor = Some(((val as f64) * 1f64) as u8);
+                }
+            },
+        ),
+        (
+            40094u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = v[0] as f64;
+                    exif.xpkeywords = Some(((val as f64) * 1f64) as u8);
+                }
+            },
+        ),
+        (
+            40095u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = v[0] as f64;
+                    exif.xpsubject = Some(((val as f64) * 1f64) as u8);
+                }
+            },
+        ),
+        (
+            40961u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.colorspace = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            40962u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.exifimagewidth = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            40963u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.exifimageheight = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            40964u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.relatedsoundfile = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            41492u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.subjectlocation = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 2f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            41985u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.customrendered = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41986u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.exposuremode = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41987u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.whitebalance = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41988u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.digitalzoomratio = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            41989u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.focallengthin35mmformat = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            41990u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.scenecapturetype = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41991u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.gaincontrol = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41992u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.contrast = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41993u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.saturation = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41994u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.sharpness = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            41996u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.subjectdistancerange = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            42016u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.imageuniqueid = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42032u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.ownername = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42033u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.serialnumber = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42034u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.lensinfo = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 4f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            42035u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.lensmake = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42036u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.lensmodel = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42037u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.lensserialnumber = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42038u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.imagetitle = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42039u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.photographer = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42040u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.imageeditor = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42041u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.camerafirmware = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42042u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.rawdevelopingsoftware = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42043u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.imageeditingsoftware = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42044u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.metadataeditingsoftware = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42080u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.compositeimage = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            42081u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.compositeimagecount = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 2f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            42112u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.gdalmetadata = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42113u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.gdalnodata = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            42240u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.gamma = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50706u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.dngversion = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 4f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            50707u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.dngbackwardversion = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 4f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            50708u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.uniquecameramodel = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50709u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.localizedcameramodel = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50712u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.linearizationtable = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 1f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            50713u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.blacklevelrepeatdim = Some(
+                    v
+                        .chunks(std::mem::size_of::<u16>())
+                        .map(|v| {
+                            let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                            ((val as f64) * 2f64) as u16
+                        })
+                        .collect::<Vec<u16>>(),
+                );
+            },
+        ),
+        (
+            50715u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.blackleveldeltah = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50716u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.blackleveldeltav = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50717u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.whitelevel = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 1f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            50718u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.defaultscale = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 2f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50719u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.defaultcroporigin = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 2f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            50720u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.defaultcropsize = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 2f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            50721u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.colormatrix1 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50722u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.colormatrix2 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50723u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cameracalibration1 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50724u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cameracalibration2 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50725u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.reductionmatrix1 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50726u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.reductionmatrix2 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50727u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.analogbalance = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50728u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.asshotneutral = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50729u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.asshotwhitexy = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 2f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50730u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.baselineexposure = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50731u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.baselinenoise = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50732u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.baselinesharpness = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50733u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.bayergreensplit = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            50734u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.linearresponselimit = Some(
+                        ((val as f64) * 1f64) as f64,
+                    );
+                }
+            },
+        ),
+        (
+            50735u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cameraserialnumber = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50736u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.dnglensinfo = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 4f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50737u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.chromablurradius = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50738u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.antialiasstrength = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50739u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.shadowscale = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50741u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.makernotesafety = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            50778u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.calibrationilluminant1 = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            50779u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.calibrationilluminant2 = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            50780u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.bestqualityscale = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            50781u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.rawdatauniqueid = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 16f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            50827u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.originalrawfilename = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50829u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.activearea = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 4f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            50830u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.maskedareas = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 1f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            50832u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.asshotpreprofilematrix = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50834u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.currentpreprofilematrix = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50879u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.colorimetricreference = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            50931u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cameracalibrationsig = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50932u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilecalibrationsig = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50934u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.asshotprofilename = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50935u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.noisereductionapplied = Some(
+                        ((val as f64) * 1f64) as f64,
+                    );
+                }
+            },
+        ),
+        (
+            50936u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilename = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50937u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilehuesatmapdims = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 3f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            50938u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilehuesatmapdata1 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f32>())
+                        .map(|v| {
+                            let val = f32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 1f64) as f32
+                        })
+                        .collect::<Vec<f32>>(),
+                );
+            },
+        ),
+        (
+            50939u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilehuesatmapdata2 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f32>())
+                        .map(|v| {
+                            let val = f32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 1f64) as f32
+                        })
+                        .collect::<Vec<f32>>(),
+                );
+            },
+        ),
+        (
+            50940u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profiletonecurve = Some(
+                    v
+                        .chunks(std::mem::size_of::<f32>())
+                        .map(|v| {
+                            let val = f32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 1f64) as f32
+                        })
+                        .collect::<Vec<f32>>(),
+                );
+            },
+        ),
+        (
+            50941u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.profileembedpolicy = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            50942u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilecopyright = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50964u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.forwardmatrix1 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50965u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.forwardmatrix2 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            50966u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.previewapplicationname = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50967u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.previewapplicationversion = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50968u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.previewsettingsname = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50969u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = v[0] as f64;
+                    exif.previewsettingsdigest = Some(
+                        ((val as f64) * 1f64) as u8,
+                    );
+                }
+            },
+        ),
+        (
+            50970u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.previewcolorspace = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            50971u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.previewdatetime = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            50972u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.rawimagedigest = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 16f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            50973u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.originalrawfiledigest = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 16f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            50981u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilelooktabledims = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 3f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            50982u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilelooktabledata = Some(
+                    v
+                        .chunks(std::mem::size_of::<f32>())
+                        .map(|v| {
+                            let val = f32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 1f64) as f32
+                        })
+                        .collect::<Vec<f32>>(),
+                );
+            },
+        ),
+        (
+            51041u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.noiseprofile = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = f64::from_le_bytes(v[..8].try_into().unwrap());
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            51043u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.timecodes = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 1f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            51044u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.framerate = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            51058u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.tstop = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            51081u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.reelname = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            51089u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.originaldefaultfinalsize = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 2f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            51090u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.originalbestqualitysize = Some(
+                    v
+                        .chunks(std::mem::size_of::<u32>())
+                        .map(|v| {
+                            let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 2f64) as u32
+                        })
+                        .collect::<Vec<u32>>(),
+                );
+            },
+        ),
+        (
+            51091u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.originaldefaultcropsize = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 2f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            51105u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cameralabel = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            51107u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.profilehuesatmapencoding = Some(
+                        ((val as f64) * 1f64) as u32,
+                    );
+                }
+            },
+        ),
+        (
+            51108u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.profilelooktableencoding = Some(
+                        ((val as f64) * 1f64) as u32,
+                    );
+                }
+            },
+        ),
+        (
+            51109u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.baselineexposureoffset = Some(
+                        ((val as f64) * 1f64) as f64,
+                    );
+                }
+            },
+        ),
+        (
+            51110u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.defaultblackrender = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            51111u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.newrawimagedigest = Some(
+                    v
+                        .chunks(std::mem::size_of::<u8>())
+                        .map(|v| {
+                            let val = v[0] as f64;
+                            ((val as f64) * 16f64) as u8
+                        })
+                        .collect::<Vec<u8>>(),
+                );
+            },
+        ),
+        (
+            51112u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = f64::from_le_bytes(v[..8].try_into().unwrap());
+                    exif.rawtopreviewgain = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            51114u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.cacheversion = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            51125u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.defaultusercrop = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 4f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            51177u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.depthformat = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            51178u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.depthnear = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            51179u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = {
+                        let num = u32::from_le_bytes(v[..4].try_into().unwrap())
+                            as f64;
+                        let den = u32::from_le_bytes(v[4..8].try_into().unwrap())
+                            as f64;
+                        if den == 0.0 { 0.0 } else { num / den }
+                    };
+                    exif.depthfar = Some(((val as f64) * 1f64) as f64);
+                }
+            },
+        ),
+        (
+            51180u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.depthunits = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            51181u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.depthmeasuretype = Some(((val as f64) * 1f64) as u16);
+                }
+            },
+        ),
+        (
+            51182u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.enhanceparams = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            52529u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u16::from_le_bytes([v[0], v[1]]) as f64;
+                    exif.calibrationilluminant3 = Some(
+                        ((val as f64) * 1f64) as u16,
+                    );
+                }
+            },
+        ),
+        (
+            52530u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.cameracalibration3 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            52531u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.colormatrix3 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            52532u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.forwardmatrix3 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            52537u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilehuesatmapdata3 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f32>())
+                        .map(|v| {
+                            let val = f32::from_le_bytes(v[..4].try_into().unwrap())
+                                as f64;
+                            ((val as f64) * 1f64) as f32
+                        })
+                        .collect::<Vec<f32>>(),
+                );
+            },
+        ),
+        (
+            52538u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.reductionmatrix3 = Some(
+                    v
+                        .chunks(std::mem::size_of::<f64>())
+                        .map(|v| {
+                            let val = {
+                                let num = i32::from_le_bytes(v[..4].try_into().unwrap())
+                                    as f64;
+                                let den = i32::from_le_bytes(v[4..8].try_into().unwrap())
+                                    as f64;
+                                if den == 0.0 { 0.0 } else { num / den }
+                            };
+                            ((val as f64) * 1f64) as f64
+                        })
+                        .collect::<Vec<f64>>(),
+                );
+            },
+        ),
+        (
+            52547u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.columninterleavefactor = Some(
+                        ((val as f64) * 1f64) as u32,
+                    );
+                }
+            },
+        ),
+        (
+            52552u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.profilegroupname = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            52553u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = f32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.jxldistance = Some(((val as f64) * 1f64) as f32);
+                }
+            },
+        ),
+        (
+            52554u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.jxleffort = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            52555u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = u32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.jxldecodespeed = Some(((val as f64) * 1f64) as u32);
+                }
+            },
+        ),
+        (
+            52897u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.seal = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            59933u16,
+            |exif: &mut Exif, v: &[u8]| {
+                {
+                    let val = i32::from_le_bytes(v[..4].try_into().unwrap())
+                        as f64;
+                    exif.offsetschema = Some(((val as f64) * 1f64) as i32);
+                }
+            },
+        ),
+        (
+            65002u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.lens = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            65100u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.rawfile = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            65101u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.converter = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            65105u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.exposure = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            65106u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.shadows = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            65107u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.brightness = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            65111u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.smoothness = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+        (
+            65112u16,
+            |exif: &mut Exif, v: &[u8]| {
+                exif.moirefilter = Some({
+                    let end = v.iter().position(|&b| b == 0).unwrap_or(v.len());
+                    String::from_utf8_lossy(&v[..end]).to_string()
+                });
+            },
+        ),
+    ]
+}
+

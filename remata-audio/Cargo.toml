@@ -1,0 +1,22 @@
+[package]
+name = "remata-audio"
+version = "1.0.0"
+edition = "2024"
+readme = "README.md"
+license = "MIT"
+description = "A Rust library for reading metadata from various media file formats."
+repository = "https://github.com/RoseBlume/remata"
+keywords = ["metadata", "audio", "video", "parser", "reader"]
+categories = ["multimedia::audio", "parsing"]
+
+
+# [[bin]]
+# name = "mata"
+# path = "src/main.rs"
+
+# [lib]
+# name = "remata-audio"
+
+[dependencies]
+remata-core = { path = "../remata-core", version = "1.0.0"}
+remata-macros = { path = "../macros/remata-macros", version = "1.0.0"}

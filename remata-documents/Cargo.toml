@@ -1,0 +1,10 @@
+[package]
+name = "remata-documents"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[features]
+default = ["simd-html"]
+simd-html = []

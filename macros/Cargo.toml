@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "exif-macros",
+    "makernote-macros",
+    "remata-macros",
+    "xmp-macros"
+]

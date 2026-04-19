@@ -1,0 +1,7 @@
+[package]
+name = "remata-iso"
+version = "1.0.0"
+edition = "2024"
+
+[dependencies]
+remata-macros = {path = "../macros/remata-macros", version = "1.0.0"}

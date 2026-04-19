@@ -1,0 +1,8 @@
+[package]
+name = "remata-xmp"
+version = "1.0.0"
+edition = "2024"
+
+[dependencies]
+remata-core = { path = "../remata-core", version = "1.0.0"}
+xmp-macros = { path = "../macros/xmp-macros" }

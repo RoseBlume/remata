@@ -1,0 +1,7 @@
+[package]
+name = "makerdemo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+remata-makernotes = {path = "../../remata-makernotes"}
