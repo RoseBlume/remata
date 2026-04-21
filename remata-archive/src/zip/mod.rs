@@ -1,446 +1,543 @@
-/// Represents metadata extracted from ZIP archives.
-///
-/// Contains fields from standard ZIP file headers such as compression,
-/// sizes, timestamps, and file identification.
-#[derive(Debug, Default, Clone)]
-pub struct ZipMeta {
-    /// Minimum version required to extract the file.
-    pub required_version: Option<u16>,
+//! Zip
 
-    /// General-purpose bit flag.
-    ///
-    /// Contains feature flags such as encryption, compression options, etc.
-    pub bit_flag: Option<u16>,
+use std::io::{self, Read};
 
-    /// Compression method used for the file.
-    pub compression: Option<ZipCompression>,
 
-    /// Last modification date/time of the file.
-    pub modify_date: Option<String>,
+use remata_macros::{DisplayPretty, FromPrimitive};
+mod simd;
+mod disp;
 
-    /// CRC-32 checksum of the uncompressed data.
-    pub crc: Option<u32>,
 
-    /// Size of the compressed data in bytes.
-    pub compressed_size: Option<u64>,
-
-    /// Size of the original uncompressed data in bytes.
-    pub uncompressed_size: Option<u64>,
-
-    /// Name of the archived file.
-    pub file_name: Option<String>,
-
-    /// Optional file comment.
-    pub comment: Option<String>,
+#[inline(always)]
+unsafe fn read_u16(ptr: *const u8) -> u16 {
+    unsafe { core::ptr::read_unaligned(ptr as *const u16) }
 }
 
-impl ZipMeta {
-    pub fn parse<R: Read + Seek>(reader: &mut R) -> io::Result<Self> {
-        let mut sig = [0u8; 4];
-        reader.read_exact(&mut sig)?;
+#[inline(always)]
+unsafe fn read_u32(ptr: *const u8) -> u32 {
+    unsafe { core::ptr::read_unaligned(ptr as *const u32) }
+}
 
-        if &sig != b"PK\x03\x04" {
-            return Ok(Self::default());
+const CHUNK_SIZE: usize = 64 * 1024;
+const MAX_BUFFER: usize = 4 * 1024 * 1024;
+
+/// Holds the signature for a Zip file
+pub const ZIP_SIG: &'static [u8; 4] = b"PK\x03\x04";
+
+/// Central File Header Signature
+pub const CENTRAL_FILE_HEADER_SIGNATURE: u32 = 0x02014b50;
+
+/// Although not originally assigned a signature, the value
+/// 0x08074b50 has commonly been adopted as a signature value
+/// for the data descriptor record.  Implementers SHOULD be
+/// aware that ZIP files MAY be encountered with or without this
+/// signature marking data descriptors and SHOULD account for
+/// either case when reading ZIP files to ensure compatibility.
+pub const DESC_SIG: u32 = 0x08074b50;
+
+/// Local Header Signature
+pub const LOCAL_HEADER_SIG: u32 = 0x04034b50;
+
+/// End of Central Directory Signature
+pub const EOCD_SIG: &[u8; 4] = b"PK\x05\x06";
+
+/// Zip Struct
+#[derive(Debug)]
+pub struct Zip {
+    /// The local file headers in a zip
+    pub local_file_headers: Vec<LocalFileHeader>,
+
+    // /// Encryption Headers
+    // pub crypt_header: Option<Vec<EncryptionHeader>>,
+
+    /// Data Descriptors
+    pub data_descriptors: Vec<DataDescriptor>,
+
+    // /// Archive Decryption Headers
+    // pub archive_decryption_headers: Vec<ArchiveDecryptionHeader>,
+
+    /// Archive Extra Data Records
+    pub archive_extra_data_records: Vec<ArchiveExtraDataRecord>,
+
+    /// Central Directory Headers
+    pub central_directory_headers: Vec<CentralDirectoryHeader>
+}
+
+impl std::default::Default for Zip {
+    fn default() -> Self {
+        Self {
+            local_file_headers: Vec::with_capacity(1024),
+            data_descriptors: Vec::with_capacity(1024),
+            archive_extra_data_records: Vec::with_capacity(256),
+            central_directory_headers: Vec::with_capacity(1024),
         }
-
-        let mut buf = [0u8; 26];
-        reader.read_exact(&mut buf)?;
-
-        let required_version = u16::from_le_bytes([buf[0], buf[1]]);
-        let bit_flag = u16::from_le_bytes([buf[2], buf[3]]);
-        let compression = u16::from_le_bytes([buf[4], buf[5]]);
-        let crc = u32::from_le_bytes([buf[10], buf[11], buf[12], buf[13]]);
-        let compressed_size =
-            u32::from_le_bytes([buf[14], buf[15], buf[16], buf[17]]) as u64;
-        let uncompressed_size =
-            u32::from_le_bytes([buf[18], buf[19], buf[20], buf[21]]) as u64;
-
-        let name_len = u16::from_le_bytes([buf[22], buf[23]]) as usize;
-        let extra_len = u16::from_le_bytes([buf[24], buf[25]]) as usize;
-
-        let mut name_buf = vec![0; name_len];
-        reader.read_exact(&mut name_buf)?;
-
-        reader.seek(SeekFrom::Current(extra_len as i64))?;
-
-        Ok(Self {
-            required_version: Some(required_version),
-            bit_flag: Some(bit_flag),
-            compression: Some(compression.into()),
-            modify_date: None,
-            crc: Some(crc),
-            compressed_size: Some(compressed_size),
-            uncompressed_size: Some(uncompressed_size),
-            file_name: Some(String::from_utf8_lossy(&name_buf).to_string()),
-            comment: None,
-        })
     }
 }
 
 
+impl Zip {
+    /// Parse a Zip file
+    pub fn parse<R: Read>(reader: &mut R) -> io::Result<Self> {
+        let mut zip = Zip::default();
+
+        let mut buffer = Vec::<u8>::with_capacity(CHUNK_SIZE * 2);
+        let mut temp = vec![0u8; CHUNK_SIZE];
+        let mut start = 0;
+
+        loop {
+            let n = reader.read(&mut temp)?;
+            if n == 0 {
+                break;
+            }
+
+            buffer.extend_from_slice(&temp[..n]);
+
+            process_buffer(&mut buffer, &mut start, &mut zip);
+
+            // Prevent pathological growth if no valid signatures found
+            if buffer.len() > MAX_BUFFER {
+                let keep = 1024; // keep last 1KB (covers any partial record)
+                let drain_to = buffer.len().saturating_sub(keep);
+                buffer.drain(0..drain_to);
+            }
+        }
+
+        // Final attempt (in case last chunk completed something)
+        process_buffer(&mut buffer, &mut start, &mut zip);
+
+        Ok(zip)
+    }
+}
+
+
+
+
+
+
+
+
+/// Local File Header
+#[derive(Default, DisplayPretty)]
+pub struct LocalFileHeader {
+    /// The version required to extract
+    pub version_req_to_extract: Option<String>, // 2 bytes
+
+    /// General-purpose bit flag.
+    ///
+    /// Contains feature flags such as encryption, compression options, etc.
+    pub bit_flag: Option<u16>, // 2 bytes
+
+    /// Compression method used for the file.
+    pub compression: Option<ZipCompression>, // 2 bytes
+
+    /// Last modification date/time of the file.
+    pub modify_time: Option<String>, // 2 bytes
+
+    /// Last modification date/time of the file.
+    pub modify_date: Option<String>, // 2 bytes
+
+
+    /// CRC-32 checksum of the uncompressed data.
+    pub crc: Option<u32>, // 4 bytes
+
+    /// Size of the compressed data in bytes.
+    pub compressed_size: Option<u32>, // 4 Bytes
+
+    /// Size of the original uncompressed data in bytes.
+    pub uncompressed_size: Option<u32>, // 4 Bytes
+
+    /// File Name Length
+    pub file_name_length: Option<u16>, // 2 bytes
+
+    /// Extra Field Length
+    pub extra_field_length: Option<u16>, // 2 bytes
+
+    /// File Name
+    pub file_name: Option<String>, // Variable length
+
+    /// Extra Field
+    pub extra_field: Option<String> // Variable length
+}
+
+impl LocalFileHeader {
+    /// Parse a Local File Header
+    pub fn parse(input: &[u8]) -> io::Result<(Self, usize)> {
+        const FIXED: usize = 26;
+
+        if input.len() < FIXED {
+            return Err(io::ErrorKind::UnexpectedEof.into());
+        }
+
+        let buf = &input[..FIXED];
+        let ptr = buf.as_ptr();
+
+        let file_name_length =
+            unsafe { read_u16(ptr.add(22)) }.to_le() as usize;
+        let extra_length =
+            unsafe { read_u16(ptr.add(24)) }.to_le() as usize;
+
+        let total = FIXED + file_name_length + extra_length;
+
+        if input.len() < total {
+            return Err(io::ErrorKind::UnexpectedEof.into());
+        }
+
+        let name = &input[FIXED..FIXED + file_name_length];
+        let extra = &input[FIXED + file_name_length..total];
+
+        let header = Self {
+            version_req_to_extract: Some(format!("{}", unsafe { read_u16(ptr.add(0)) }.to_le())),
+            bit_flag: Some(unsafe { read_u16(ptr.add(2)) }.to_le()),
+            compression: Some(ZipCompression::from(unsafe { read_u16(ptr.add(4)) }.to_le())),
+            modify_time: Some(format!("{}", unsafe { read_u16(ptr.add(6)) }.to_le())),
+            modify_date: Some(format!("{}", unsafe { read_u16(ptr.add(8)) }.to_le())),
+            crc: Some(unsafe { read_u32(ptr.add(10)) }.to_le()),
+            compressed_size: Some(unsafe { read_u32(ptr.add(14)) }.to_le()),
+            uncompressed_size: Some(unsafe { read_u32(ptr.add(18)) }.to_le()),
+            file_name_length: Some(file_name_length as u16),
+            extra_field_length: Some(extra_length as u16),
+            file_name: Some(String::from_utf8_lossy(name).to_string()),
+            extra_field: Some(format!("{:x?}", extra)),
+        };
+
+        Ok((header, total))
+    }
+    /// Merge a DataDescriptor with a Local Filer Header
+    pub fn merge(&mut self, desc: &DataDescriptor) {
+        if self.crc.unwrap_or(0) == 0 {
+            self.crc = desc.crc;
+        }
+        if self.compressed_size.unwrap_or(0) == 0 {
+            self.compressed_size = desc.compressed_size;
+        }
+        if self.uncompressed_size.unwrap_or(0) == 0 {
+            self.uncompressed_size = desc.uncompressed_size;
+        }
+    }
+}
+
+
+
+/// When the Central Directory Encryption method is used,
+/// the data descriptor record is not required, but MAY be used.
+/// If present, and bit 3 of the general purpose bit field is set to
+/// indicate its presence, the values in fields of the data descriptor
+/// record MUST be set to binary zeros.  See the section on the Strong
+/// Encryption Specification for information. Refer to the section in
+/// this document entitled "Incorporating PKWARE Proprietary Technology
+/// into Your Product" for more information.
+#[derive(Default, DisplayPretty)]
+pub struct DataDescriptor {
+    /// CRC-32 checksum of the data.
+    pub crc: Option<u32>, // 4 bytes
+
+    /// Size of the compressed data in bytes.
+    pub compressed_size: Option<u32>, // 4 Bytes
+
+    /// Size of the original uncompressed data in bytes.
+    pub uncompressed_size: Option<u32>, // 4 Bytes
+}
+
+impl DataDescriptor {
+    /// Parse a Data Descriptor
+    pub fn parse(input: &[u8]) -> io::Result<(Self, usize)> {
+        const SIZE: usize = 12;
+
+        if input.len() < SIZE {
+            return Err(io::ErrorKind::UnexpectedEof.into());
+        }
+
+        let ptr = input.as_ptr();
+
+        let desc = Self {
+            crc: Some(unsafe { read_u32(ptr.add(0)) }.to_le()),
+            compressed_size: Some(unsafe { read_u32(ptr.add(4)) }.to_le()),
+            uncompressed_size: Some(unsafe { read_u32(ptr.add(8)) }.to_le()),
+        };
+
+        Ok((desc, SIZE))
+    }
+}
+
 /// Compression methods used in ZIP archives.
-#[derive(Debug, Clone, Copy)]
+#[derive(DisplayPretty, Clone, Copy, FromPrimitive)]
 pub enum ZipCompression {
+    /// No compression applied.
+    #[value = 0]
     None,
+    /// LZW compression (Shrunk).
+    #[value = 1]
     Shrunk,
+    /// Reduced compression with factor 1.
+    #[value = 2]
     Reduced1,
+    /// Reduced compression with factor 2.
+    #[value = 3]
     Reduced2,
+    /// Reduced compression with factor 3.
+    #[value = 4]
     Reduced3,
+    /// Reduced compression with factor 4.
+    #[value = 5]
     Reduced4,
+    /// PKWARE's implode method.
+    #[value = 6]
     Imploded,
+    /// Tokenized compression (reserved).
+    #[value = 7]
     Tokenized,
+    /// DEFLATE compression (most common).
+    #[value = 8]
     Deflated,
+    /// Enhanced DEFLATE (Deflate64).
+    #[value = 9]
     Deflate64,
+    /// Older implode method.
+    #[value = 10]
     ImplodedOld,
+    /// BZIP2 compression.
+    #[value = 12]
     Bzip2,
+    /// LZMA compression.
+    #[value = 14]
     Lzma,
+    /// IBM TERSE (new).
+    #[value = 18]
     IbmTerseNew,
+    /// IBM LZ77 compression.
+    #[value = 19]
     IbmLz77,
+    /// JPEG compression for images.
+    #[value = 96]
     Jpeg,
+    /// WavPack audio compression.
+    #[value = 97]
     WavPack,
+    /// PPMd compression.
+    #[value = 98]
     Ppmd,
     /// Unknown or unsupported compression method.
     Unknown(u16),
 }
 
-/// Represents metadata extracted from GZIP archives.
-///
-/// Note: GZIP metadata typically applies to a single file entry.
-#[derive(Debug, Default, Clone)]
-pub struct GzipMeta {
-    /// Compression method used (usually Deflate).
-    pub compression: Option<GzipCompression>,
+/// Signature for Extra Data Record
+pub const ARCHIVE_EXTRA_DATA_REC_SIG: u32 = 0x08064b50;
 
-    /// GZIP flags indicating optional fields and properties.
-    pub flags: Option<GzipFlags>,
-
-    /// Last modification date/time.
-    pub modify_date: Option<String>,
-
-    /// Extra compression flags indicating compression level.
-    pub extra_flags: Option<GzipExtraFlags>,
-
-    /// Operating system where the archive was created.
-    pub operating_system: Option<GzipOs>,
-
-    /// Original file name stored in the archive.
-    pub file_name: Option<String>,
-
-    /// Optional comment stored in the archive.
-    pub comment: Option<String>,
+/// Archive Extra Data Record
+#[derive(Default, DisplayPretty)]
+pub struct ArchiveExtraDataRecord {
+    /// The length of the extra field
+    pub extra_field_length: Option<u32>, // 4 bytes
+    /// The extra fields data
+    pub extra_field_data: Vec<u8> // Variable Size
 }
 
-impl GzipMeta {
-    pub fn parse<R: Read>(reader: &mut R) -> io::Result<Self> {
-        let mut header = [0u8; 10];
-        reader.read_exact(&mut header)?;
-
-        if header[0] != 0x1F || header[1] != 0x8B {
-            return Ok(Self::default());
+impl ArchiveExtraDataRecord {
+    /// Parse an Archive Data Record
+    pub fn parse(input: &[u8]) -> io::Result<(Self, usize)> {
+        if input.len() < 4 {
+            return Err(io::ErrorKind::UnexpectedEof.into());
         }
 
-        let compression = GzipCompression::from(header[2]);
-        let flags_byte = header[3];
+        let ptr = input.as_ptr();
 
-        let flags = GzipFlags {
-            text: flags_byte & 0x01 != 0,
-            crc16: flags_byte & 0x02 != 0,
-            extra_fields: flags_byte & 0x04 != 0,
-            file_name: flags_byte & 0x08 != 0,
-            comment: flags_byte & 0x10 != 0,
+        let len = unsafe { read_u32(ptr) }.to_le() as usize;
+        let total = 4 + len;
+
+        if input.len() < total {
+            return Err(io::ErrorKind::UnexpectedEof.into());
+        }
+
+        let data = input[4..total].to_vec();
+
+        let record = Self {
+            extra_field_length: Some(len as u32),
+            extra_field_data: data,
         };
 
-        let extra_flags = GzipExtraFlags::from(header[8]);
-        let os = GzipOs::from(header[9]);
-
-        Ok(Self {
-            compression: Some(compression),
-            flags: Some(flags),
-            modify_date: None,
-            extra_flags: Some(extra_flags),
-            operating_system: Some(os),
-            file_name: None,
-            comment: None,
-        })
+        Ok((record, total))
     }
 }
 
-/// Compression method used in GZIP archives.
-#[derive(Debug, Clone, Copy)]
-pub enum GzipCompression {
-    /// Deflate compression (standard).
-    Deflated,
-    /// Unknown compression method.
-    Unknown(u8),
-}
 
-/// Bit flags describing optional fields in a GZIP header.
-#[derive(Debug, Default, Clone)]
-pub struct GzipFlags {
-    /// Indicates text data.
-    pub text: bool,
-    /// Indicates presence of CRC16.
-    pub crc16: bool,
-    /// Indicates extra fields exist.
-    pub extra_fields: bool,
-    /// Indicates file name is present.
-    pub file_name: bool,
-    /// Indicates comment is present.
-    pub comment: bool,
-}
+/// Central Directory header
+#[derive(Default, DisplayPretty)]
+pub struct CentralDirectoryHeader {
+    /// The version required to extract
+    pub version_made_by: Option<String>, // 2 bytes
+    /// The version required to extract
+    pub version_req_to_extract: Option<String>, // 2 bytes
 
-/// Extra compression flags for GZIP.
-#[derive(Debug, Clone, Copy)]
-pub enum GzipExtraFlags {
-    None,
-    MaximumCompression,
-    Fastest,
-    /// Unknown or unspecified flag.
-    Unknown(u8),
-}
+    /// General-purpose bit flag.
+    ///
+    /// Contains feature flags such as encryption, compression options, etc.
+    pub bit_flag: Option<u16>, // 2 bytes
 
-/// Operating systems recognized in GZIP headers.
-#[derive(Debug, Clone, Copy)]
-pub enum GzipOs {
-    Fat,
-    Amiga,
-    Vms,
-    Unix,
-    VmCms,
-    AtariTos,
-    Hpfs,
-    Macintosh,
-    ZSystem,
-    CpM,
-    Tops20,
-    Ntfs,
-    Qdos,
-    AcornRiscos,
-    Unknown,
-}
+    /// Compression method used for the file.
+    pub compression: Option<ZipCompression>, // 2 bytes
 
-/// Represents metadata extracted from RAR archives (v4 and earlier).
-#[derive(Debug, Default, Clone)]
-pub struct RarMeta {
-    /// Size of the compressed file in bytes.
-    pub compressed_size: Option<u64>,
+    /// Last modification date/time of the file.
+    pub modify_time: Option<String>, // 2 bytes
 
-    /// Size of the original uncompressed file in bytes.
-    pub uncompressed_size: Option<u64>,
+    /// Last modification date/time of the file.
+    pub modify_date: Option<String>, // 2 bytes
 
-    /// Operating system where the archive was created.
-    pub operating_system: Option<RarOs>,
 
-    /// Last modification date/time.
-    pub modify_date: Option<String>,
-
-    /// Compression method used.
-    pub packing_method: Option<RarPackingMethod>,
-
-    /// Name of the archived file.
-    pub file_name: Option<String>,
-}
-
-impl RarMeta {
-    pub fn parse<R: Read>(reader: &mut R) -> io::Result<Self> {
-        let mut sig = [0u8; 7];
-        reader.read_exact(&mut sig)?;
-
-        if &sig != b"Rar!\x1A\x07\x00" {
-            return Ok(Self::default());
-        }
-
-        let mut buf = [0u8; 32];
-        reader.read_exact(&mut buf)?;
-
-        Ok(Self {
-            compressed_size: None,
-            uncompressed_size: None,
-            operating_system: Some(RarOs::from(buf[15])),
-            modify_date: None,
-            packing_method: Some(RarPackingMethod::from(buf[25])),
-            file_name: None,
-        })
-    }
-}
-
-/// Operating systems for RAR archives.
-#[derive(Debug, Clone, Copy)]
-pub enum RarOs {
-    MsDos,
-    Os2,
-    Win32,
-    Unix,
-    /// Unknown or unsupported OS.
-    Unknown(u8),
-}
-
-/// Compression methods used in RAR archives.
-#[derive(Debug, Clone, Copy)]
-pub enum RarPackingMethod {
-    Stored,
-    Fastest,
-    Fast,
-    Normal,
-    Good,
-    Best,
-    /// Unknown method.
-    Unknown(u8),
-}
-
-/// Represents metadata extracted from RAR5 and 7z archives.
-///
-/// These formats share similar metadata structures.
-#[derive(Debug, Default, Clone)]
-pub struct Rar5Meta {
-    /// Name of the archived file.
-    pub file_name: Option<String>,
+    /// CRC-32 checksum of the uncompressed data.
+    pub crc: Option<u32>, // 4 bytes
 
     /// Size of the compressed data in bytes.
-    pub compressed_size: Option<u64>,
+    pub compressed_size: Option<u32>, // 4 Bytes
 
-    /// File version (if present).
-    pub file_version: Option<String>,
+    /// Size of the original uncompressed data in bytes.
+    pub uncompressed_size: Option<u32>, // 4 Bytes
 
-    /// Last modification date/time.
-    pub modify_date: Option<String>,
+    /// File Name Length
+    pub file_name_length: Option<u16>, // 2 bytes
 
-    /// Operating system where the archive was created.
-    pub operating_system: Option<Rar5Os>,
+    /// Extra Field Length
+    pub extra_field_length: Option<u16>, // 2 bytes
 
-    /// Size of the uncompressed data in bytes.
-    pub uncompressed_size: Option<u64>,
+    /// File Comment Length
+    pub file_comment_length: Option<u16>, // 2 bytes
+
+    /// Disk Number Start
+    pub disk_number_start: Option<u16>, // 2 bytes
+
+    /// Internal File Attributes
+    pub internal_file_attributes: Option<u16>, // 2 bytes
+
+    /// External File Attributes
+    pub external_file_attributes: Option<u32>, // 2 bytes
+
+    /// Relative Offset of Local Header
+    pub relative_offset_of_local_header: Option<u32>,
+    // relative offset of local header 4 bytes
+
+    /// File Name
+    pub file_name: Option<String>, // Variable length
+
+    /// Extra Field
+    pub extra_field: Option<String>, // Variable length
+
+    /// File Comment
+    pub file_comment: Option<String>, // Variable length
 }
 
-impl Rar5Meta {
-    pub fn parse<R: Read>(reader: &mut R) -> io::Result<Self> {
-        let mut sig = [0u8; 8];
-        reader.read_exact(&mut sig)?;
+impl CentralDirectoryHeader {
+    /// Parse a Central Directory Header
+    pub fn parse(input: &[u8]) -> io::Result<(Self, usize)> {
+        const FIXED: usize = 42;
 
-        if &sig != b"Rar!\x1A\x07\x01\x00" {
-            return Ok(Self::default());
+        if input.len() < FIXED {
+            return Err(io::ErrorKind::UnexpectedEof.into());
         }
 
-        Ok(Self {
-            file_name: None,
-            compressed_size: None,
-            file_version: None,
-            modify_date: None,
-            operating_system: None,
-            uncompressed_size: None,
-        })
+        let buf = &input[..FIXED];
+        let ptr = buf.as_ptr();
+
+        let file_name_length =
+            unsafe { read_u16(ptr.add(24)) }.to_le() as usize;
+        let extra_length =
+            unsafe { read_u16(ptr.add(26)) }.to_le() as usize;
+        let comment_length =
+            unsafe { read_u16(ptr.add(28)) }.to_le() as usize;
+
+        let total = FIXED + file_name_length + extra_length + comment_length;
+
+        if input.len() < total {
+            return Err(io::ErrorKind::UnexpectedEof.into());
+        }
+
+        let name_start = FIXED;
+        let extra_start = name_start + file_name_length;
+        let comment_start = extra_start + extra_length;
+
+        let name = &input[name_start..extra_start];
+        let extra = &input[extra_start..comment_start];
+        let comment = &input[comment_start..total];
+
+        let header = Self {
+            version_made_by: Some(format!("{}", unsafe { read_u16(ptr.add(0)) }.to_le())),
+            version_req_to_extract: Some(format!("{}", unsafe { read_u16(ptr.add(2)) }.to_le())),
+            bit_flag: Some(unsafe { read_u16(ptr.add(4)) }.to_le()),
+            compression: Some(ZipCompression::from(unsafe { read_u16(ptr.add(6)) }.to_le())),
+            modify_time: Some(format!("{}", unsafe { read_u16(ptr.add(8)) }.to_le())),
+            modify_date: Some(format!("{}", unsafe { read_u16(ptr.add(10)) }.to_le())),
+            crc: Some(unsafe { read_u32(ptr.add(12)) }.to_le()),
+            compressed_size: Some(unsafe { read_u32(ptr.add(16)) }.to_le()),
+            uncompressed_size: Some(unsafe { read_u32(ptr.add(20)) }.to_le()),
+            file_name_length: Some(file_name_length as u16),
+            extra_field_length: Some(extra_length as u16),
+            file_comment_length: Some(comment_length as u16),
+            disk_number_start: Some(unsafe { read_u16(ptr.add(30)) }.to_le()),
+            internal_file_attributes: Some(unsafe { read_u16(ptr.add(32)) }.to_le()),
+            external_file_attributes: Some(unsafe { read_u32(ptr.add(34)) }.to_le()),
+            relative_offset_of_local_header: Some(unsafe { read_u32(ptr.add(38)) }.to_le()),
+            file_name: Some(String::from_utf8_lossy(name).to_string()),
+            extra_field: Some(format!("{:x?}", extra)),
+            file_comment: Some(String::from_utf8_lossy(comment).to_string()),
+        };
+
+        Ok((header, total))
     }
 }
 
-/// Operating systems for RAR5 / 7z archives.
-#[derive(Debug, Clone, Copy)]
-pub enum Rar5Os {
-    Win32,
-    Unix,
-    /// Unknown or unspecified OS.
-    Unknown(u8),
-}
+fn process_buffer(buffer: &mut Vec<u8>, start: &mut usize, zip: &mut Zip) {
+    let mut i = *start;
 
-impl From<u16> for ZipCompression {
-    fn from(v: u16) -> Self {
-        match v {
-            0 => Self::None,
-            1 => Self::Shrunk,
-            2 => Self::Reduced1,
-            3 => Self::Reduced2,
-            4 => Self::Reduced3,
-            5 => Self::Reduced4,
-            6 => Self::Imploded,
-            7 => Self::Tokenized,
-            8 => Self::Deflated,
-            9 => Self::Deflate64,
-            10 => Self::ImplodedOld,
-            12 => Self::Bzip2,
-            14 => Self::Lzma,
-            18 => Self::IbmTerseNew,
-            19 => Self::IbmLz77,
-            96 => Self::Jpeg,
-            97 => Self::WavPack,
-            98 => Self::Ppmd,
-            other => Self::Unknown(other),
+    #[cfg(target_arch = "x86_64")]
+    unsafe {
+        if is_x86_feature_detected!("avx2") {
+            i = simd::process_avx2(buffer, i, zip);
+        } else if is_x86_feature_detected!("sse2") {
+            i = simd::process_sse2(buffer, i, zip);
         }
     }
-}
 
-impl From<u8> for GzipCompression {
-    fn from(v: u8) -> Self {
-        match v {
-            8 => Self::Deflated,
-            other => Self::Unknown(other),
+    #[cfg(target_arch = "aarch64")]
+    unsafe {
+        if is_aarch64_feature_detected!("neon") {
+            i = process_neon(buffer, i, zip);
         }
     }
-}
 
-impl From<u8> for GzipExtraFlags {
-    fn from(v: u8) -> Self {
-        match v {
-            0 => Self::None,
-            2 => Self::MaximumCompression,
-            4 => Self::Fastest,
-            other => Self::Unknown(other),
+    while i + 4 <= buffer.len() {
+        if buffer[i] == b'P' && buffer[i + 1] == b'K' {
+            let sig = u32::from_le_bytes([
+                buffer[i],
+                buffer[i + 1],
+                buffer[i + 2],
+                buffer[i + 3],
+            ]);
+
+            let slice = &buffer[i + 4..];
+
+            let result = if sig == LOCAL_HEADER_SIG {
+                LocalFileHeader::parse(slice)
+                    .map(|(h, c)| {
+                        zip.local_file_headers.push(h);
+                        c
+                    })
+            } else {
+                Err(io::ErrorKind::InvalidData.into())
+            };
+
+            if let Ok(consumed) = result {
+                i += 4 + consumed;
+                continue;
+            }
         }
+
+        i += 1;
     }
-}
 
-impl From<u8> for GzipOs {
-    fn from(v: u8) -> Self {
-        match v {
-            0 => Self::Fat,
-            1 => Self::Amiga,
-            2 => Self::Vms,
-            3 => Self::Unix,
-            4 => Self::VmCms,
-            5 => Self::AtariTos,
-            6 => Self::Hpfs,
-            7 => Self::Macintosh,
-            8 => Self::ZSystem,
-            9 => Self::CpM,
-            10 => Self::Tops20,
-            11 => Self::Ntfs,
-            12 => Self::Qdos,
-            13 => Self::AcornRiscos,
-            _ => Self::Unknown,
-        }
-    }
-}
+    *start = i;
 
-impl From<u8> for RarOs {
-    fn from(v: u8) -> Self {
-        match v {
-            0 => Self::MsDos,
-            1 => Self::Os2,
-            2 => Self::Win32,
-            3 => Self::Unix,
-            other => Self::Unknown(other),
-        }
-    }
-}
-
-impl From<u8> for RarPackingMethod {
-    fn from(v: u8) -> Self {
-        match v {
-            0x30 => Self::Stored,
-            0x31 => Self::Fastest,
-            0x32 => Self::Fast,
-            0x33 => Self::Normal,
-            0x34 => Self::Good,
-            0x35 => Self::Best,
-            other => Self::Unknown(other),
-        }
-    }
-}
-
-impl From<u8> for Rar5Os {
-    fn from(v: u8) -> Self {
-        match v {
-            0 => Self::Win32,
-            1 => Self::Unix,
-            other => Self::Unknown(other),
-        }
+    if *start > (1 << 20) {
+        let drain_to = (*start).min(buffer.len());
+        buffer.drain(0..drain_to);
+        *start -= drain_to; // keep relative position correct
+        // *start = 0;
     }
 }

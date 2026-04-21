@@ -18,7 +18,7 @@ const WORKING_DIRECTORY: usize = 0x30010;
 const COMMAND_LINE_ARGUEMENTS: usize = 0x30020;
 const ICON_FILE_NAME: usize = 0x30040;
 const OFFSET: usize = ITEM_ID - LINK_INFO;
-#[derive(Debug, Default)]
+#[derive(Default, DisplayPretty)]
 pub struct Lnk {
     pub flags: Option<FlagSet>, // BitEnum
     pub file_attributes: Option<AttributeSet>, // BitEnum

@@ -1,0 +1,13 @@
+[package]
+name = "archie"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.102"
+ar = "0.9.0"
+remata-archive = { path = "../../../remata-archive" }
+tar = "0.4.45"
+walkdir = "2.5.0"
+xz2 = "0.1.7"
+zstd = "0.13.3"

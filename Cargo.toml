@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "tools/rust/*",
     "helpers/*",
     "remata-audio",
     "remata-xmp",
@@ -13,12 +14,11 @@ members = [
     "remata-documents",
     "remata-makernotes",
     "remata-lnk",
-    # "xmp-codegen",
-    "reexif",
-    "macros/*"
-, "remata-tempexif"]
+    "macros/*", "remata-binary",
+]
 resolver = "3"
 
 
 [workspace.dependencies]
 remata-macros = { path = "macros/remata-macros" }
+endian-reader = { path = "helpers/endian-reader" }

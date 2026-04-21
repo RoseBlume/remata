@@ -1,3 +1,4 @@
+//! Torrent
 use remata_macros::DisplayPretty;
 use std::collections::HashMap;
 use std::io::{self, Read, Seek};
@@ -489,7 +490,7 @@ fn encode_bencode(v: &Bencode) -> Vec<u8> {
 // -----------------------------
 //
 
-pub fn sha1(data: &[u8]) -> [u8; 20] {
+fn sha1(data: &[u8]) -> [u8; 20] {
     let mut h0 = 0x67452301u32;
     let mut h1 = 0xEFCDAB89u32;
     let mut h2 = 0x98BADCFEu32;

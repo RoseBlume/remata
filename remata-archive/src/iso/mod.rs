@@ -1,5 +1,9 @@
-use std::io::{Read, Seek, SeekFrom};
+//! ISO Module
+use std::io::{Read, Seek, SeekFrom, Error, ErrorKind};
 use remata_macros::DisplayPretty;
+
+/// Holds the signature for an ISO 9960 image
+pub const ISO_9660_SIG: &'static [u8; 5] = b"CD001";
 
 /// Represents a parsed ISO9660 image.
 ///
@@ -222,7 +226,12 @@ impl Iso {
     pub fn parse<R: Read + Seek>(mut reader: R) -> std::io::Result<Self> {
         const SECTOR_SIZE: u64 = 2048;
         const START_SECTOR: u64 = 16;
+        let mut sig: [u8; 5] = [0u8; 5];
+        reader.read_exact(&mut sig)?;
 
+        if &sig != ISO_9660_SIG {
+            return Err(Error::new(ErrorKind::InvalidData, "Not a 9960 ISO Image"));
+        }
         let mut iso = Iso {
             boot_record: None,
             primary_volume: None,

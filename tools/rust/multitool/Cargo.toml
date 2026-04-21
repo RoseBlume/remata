@@ -1,0 +1,18 @@
+[package]
+name = "multitool"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+endian-reader = { path = "../../../helpers/endian-reader" }
+remata-audio = { path = "../../../remata-audio" }
+remata-archive = { path = "../../../remata-archive" }
+remata-documents = { path = "../../../remata-documents" }
+# windows::Windows
+remata-exe = { path = "../../../remata-exe" }
+# Lnk
+remata-lnk = { path = "../../../remata-lnk" }
+# Incomplete
+remata-video = { path = "../../../remata-video" }
+remata-xmp = { path = "../../../remata-xmp" }
+remata-macros = { path = "../../../macros/remata-macros" }

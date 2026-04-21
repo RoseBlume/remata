@@ -79,20 +79,27 @@ pub fn expand(input: TokenStream) -> TokenStream {
     }
 
     // --- Generate match arms
-    let mut match_arms = String::new();
+    let mut match_arms_try = String::new();
+    let mut match_arms_from = String::new();
+
     for (name, val) in &variants {
-        match_arms.push_str(&format!(
+        match_arms_try.push_str(&format!(
             "{} => Ok(Self::{}),",
+            val, name
+        ));
+
+        match_arms_from.push_str(&format!(
+            "{} => Self::{},",
             val, name
         ));
     }
 
     // --- Fallback behavior
-    let fallback = if let Some(unknown) = unknown_variant {
-        format!("_ => Ok(Self::{}(v as _)),", unknown)
-    } else {
-        "_ => Err(()),".to_string()
-    };
+    // let _fallback = if let Some(unknown) = &unknown_variant {
+    //     format!("_ => Ok(Self::{}(v as _)),", unknown)
+    // } else {
+    //     "_ => Err(()),".to_string()
+    // };
 
     // --- Supported primitives
     let primitives = [
@@ -103,18 +110,33 @@ pub fn expand(input: TokenStream) -> TokenStream {
     let mut impls = String::new();
 
     for prim in primitives {
-        impls.push_str(&format!(
-            "impl core::convert::TryFrom<{prim}> for {enum_name} {{
-                type Error = ();
-
-                fn try_from(v: {prim}) -> Result<Self, Self::Error> {{
-                    match v as i128 {{
-                        {match_arms}
-                        {fallback}
+        if let Some(unknown) = &unknown_variant {
+            // --- Generate From (infallible)
+            impls.push_str(&format!(
+                "impl core::convert::From<{prim}> for {enum_name} {{
+                    fn from(v: {prim}) -> Self {{
+                        match v as i128 {{
+                            {match_arms_from}
+                            _ => Self::{unknown}(v as _),
+                        }}
                     }}
-                }}
-            }}"
-        ));
+                }}"
+            ));
+        } else {
+            // --- Generate TryFrom (fallible)
+            impls.push_str(&format!(
+                "impl core::convert::TryFrom<{prim}> for {enum_name} {{
+                    type Error = ();
+
+                    fn try_from(v: {prim}) -> Result<Self, Self::Error> {{
+                        match v as i128 {{
+                            {match_arms_try}
+                            _ => Err(()),
+                        }}
+                    }}
+                }}"
+            ));
+        }
     }
 
     impls.parse().unwrap()
